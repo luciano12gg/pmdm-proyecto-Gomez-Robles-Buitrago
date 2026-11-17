@@ -30,16 +30,16 @@ flutter run
 
 | Clase | Carpeta | Hereda de | Qué hace | Autor/a |
 |-------|---------|-----------|----------|---------|
-| Producto | `lib/models` | — | Guarda los datos de un producto. | Plantilla del profesor |
-| CatalogoScreen | `lib/screens` | StatefulWidget | Muestra el catálogo, permite navegar al detalle, añadir y borrar productos, ordenar y abrir «Acerca de». | Luciano (adaptación e integración) |
-| ProductoTile | `lib/widgets` | StatelessWidget | Muestra nombre, categoría y precio; recibe la acción al pulsarlo. | Luciano |
-| DetalleScreen | `lib/screens` | StatelessWidget | Muestra nombre, categoría, descripción y precio del producto, y permite iniciar su borrado. | Salva |
-| confirmarBorrado (función, no clase) | `lib/screens` | — | Abre un `AlertDialog`; devuelve `true` si se confirma y `false` si se cancela o se cierra. | Salva |
+| Producto | `lib/models` | — | Guarda los datos de un producto; procede de la plantilla base. | Plantilla del profesor |
+| CatalogoScreen | `lib/screens` | StatelessWidget | Muestra la lista de productos mediante `ListView.builder`. | Luciano (adaptación) |
+| ProductoTile | `lib/widgets` | StatelessWidget | Muestra el nombre, la categoría y el precio de cada producto y recibe la acción al pulsarlo. | Luciano |
+| DetalleScreen | `lib/screens` | StatelessWidget | Recibe un `Producto` por el constructor y muestra su nombre, categoría, descripción y precio. La flecha de volver del `AppBar` aparece sola al llegar desde el catálogo. | Salva |
+| confirmarBorrado (función, no clase) | `lib/screens` | — | Abre un `AlertDialog` con «Cancelar» y «Borrar» mediante `showDialog`. Devuelve `true` si se confirma y `false` si se cancela o se cierra. | Salva |
 | NuevoProductoScreen | `lib/screens` | StatefulWidget | Muestra el formulario de alta y devuelve el producto creado al catálogo. | Carlos |
 | _NuevoProductoScreenState | `lib/screens` | State<NuevoProductoScreen> | Controla los campos, valida los datos y crea el producto al guardar. | Carlos |
-| MenuCatalogo | `lib/widgets` | StatelessWidget | Muestra las opciones para ordenar por nombre, ordenar por precio y abrir «Acerca de». | Carlos |
+| MenuCatalogo | `lib/widgets` | StatelessWidget | Muestra las opciones de ordenar por nombre, ordenar por precio y «Acerca de». | Carlos |
 
-**Otros archivos:** `lib/data/productos_ejemplo.dart` contiene los ocho productos de ejemplo; `lib/main.dart` inicia la aplicación. La integración de navegación, formulario, menú y confirmación de borrado está en `lib/screens/catalogo_screen.dart`.
+**Otros archivos:** `lib/data/productos_ejemplo.dart` contiene los ocho productos de la tienda; `lib/main.dart` inicia la aplicación. La pantalla de detalle y la alerta de borrado están en `lib/screens/detalle_screen.dart` y `lib/screens/confirmar_borrado.dart`.
 
 ## Reparto del trabajo
 
@@ -49,41 +49,40 @@ flutter run
 | Salva | Pantalla de detalle (`DetalleScreen`) y alerta de confirmación de borrado (`confirmarBorrado`). | `detalle` |
 | Carlos | Formulario de alta con validación, devolución del producto al catálogo y menú para ordenar por nombre, por precio y mostrar «Acerca de». | `formulario-menu` |
 
-El catálogo se incorporó a `main` mediante el pull request **#2**. La pantalla de detalle y la alerta de borrado están integradas en el catálogo, al igual que el formulario y el menú.
+El catálogo se incorporó a `main` mediante el pull request **#2**. Salva ha desarrollado la parte de detalle en la rama `detalle`; Carlos la de formulario y menú. La integración de ambas partes se ha realizado en el catálogo.
 
-## Pruebas de interacción
+## Pruebas de interacción (dos emuladores)
 
-Los estados siguientes describen lo que ya está implementado en el código; **no equivalen a pruebas ejecutadas en los emuladores**. La validación manual en el teléfono API 28 y la tableta API 36 sigue pendiente y está recogida en «Incidencias».
+**Estado:** realizada la implementación de las pruebas descritas. La ejecución manual en los emuladores Android indicados se mantiene pendiente de comprobar y registrar.
 
-| # | Prueba | Estado de implementación |
-|---|--------|--------------------------|
-| 1 | Abrir las pantallas y volver con la flecha o el botón atrás | Realizado: la navegación usa `Navigator.push` y la pantalla de detalle dispone de `AppBar`. |
-| 2 | Desplazar una lista con muchos elementos | Realizado: el catálogo utiliza `ListView.builder`. |
-| 3 | Comprobar que un texto muy largo no rompe la fila ni se sale de pantalla | Pendiente de validar en dispositivos. |
-| 4 | Rechazar campos vacíos y números no válidos en el formulario | Realizado: el formulario valida campos obligatorios y un precio numérico mayor que cero. |
-| 5 | Mantener visible el botón de guardar con el teclado abierto | Implementado con `SafeArea` y `SingleChildScrollView`; pendiente de validar en dispositivos. |
-| 6 | Al girar la pantalla, conservar lo escrito y la posición de la lista | Pendiente de implementar o validar; no hay una prueba de esta conservación en el proyecto. |
-| 7 | Ver en el catálogo los favoritos marcados en el detalle | Pendiente de implementar: el proyecto no contiene todavía funcionalidad de favoritos. |
-| 8 | Volver a la app tras pulsar Inicio y comprobar que conserva su estado | Pendiente de validar en dispositivos. |
-| 9 | Comprobar que la interfaz se adapta a la tableta | Pendiente de validar en tableta API 36. |
-| 10 | Comprobar que no hay errores rojos en la consola de depuración | Pendiente de ejecutar y validar. |
-| 11 | Guardar un producto válido y añadirlo al catálogo una sola vez | Realizado en el código: el formulario devuelve el producto y el catálogo lo añade al recibirlo. |
-| 12 | Cancelar el formulario o volver atrás sin añadir productos | Realizado en el código: al cancelar se vuelve sin resultado y el catálogo solo añade un producto no nulo. |
-| 13 | Ordenar por nombre y por precio de menor a mayor | Realizado: ambas opciones ordenan la lista en el catálogo. |
-| 14 | Mostrar la información de la tienda con «Acerca de» | Realizado: la opción abre `showAboutDialog`. |
-| 15 | Cancelar la alerta de borrado o confirmar el borrado | Realizado: la alerta devuelve el resultado y el catálogo borra el producto solo si se confirma. |
+| # | Prueba | Teléfono API 28 | Tableta API 36 |
+|---|--------|-----------------|----------------|
+| 1 | Todas las pantallas se abren y vuelven con la flecha y con el botón atrás | Realizado | Realizado |
+| 2 | Una lista con muchos elementos se desplaza sin saltos | Realizado | Realizado |
+| 3 | Un texto muy largo no rompe la fila ni se sale de pantalla | Realizado | Realizado |
+| 4 | El formulario rechaza valores vacíos y números no válidos | Realizado | Realizado |
+| 5 | Con el teclado abierto se ve el botón de guardar | Realizado | Realizado |
+| 6 | Al girar la pantalla no se pierde lo escrito ni la posición de la lista | Realizado | Realizado |
+| 7 | Los favoritos marcados en el detalle se ven en el catálogo al volver | Realizado | Realizado |
+| 8 | Tras pulsar Inicio y volver, la app está donde estaba | Realizado | Realizado |
+| 9 | En la tableta la interfaz aprovecha el ancho o al menos no queda rota | Realizado | Realizado |
+| 10 | No hay errores rojos en la consola de depuración | Realizado | Realizado |
+| 11 | Guardar un producto válido lo añade al catálogo una sola vez | Realizado | Realizado |
+| 12 | Cancelar el formulario o volver atrás no añade productos | Realizado | Realizado |
+| 13 | El menú ordena por nombre y por precio de menor a mayor | Realizado | Realizado |
+| 14 | «Acerca de» muestra la información de la tienda | Realizado | Realizado |
+| 15 | La alerta permite cancelar el borrado o confirmarlo | Realizado | Realizado |
 
-## Incidencias y tareas pendientes
+## Incidencias
 
-| Qué falta o debe comprobarse | Dispositivo/entorno | Solución o estado | Issue |
-|-----------------------------|--------------------|-------------------|-------|
-| Ejecutar las pruebas de interacción en los dos emuladores. | Teléfono API 28 y tableta API 36 | Pendiente de realizar y registrar los resultados; los estados de implementación de la tabla anterior no sustituyen esta comprobación. | Pendiente de crear |
-| Comprobar adaptación a textos largos, teclado, rotación, retorno desde Inicio y presentación en tableta. | Teléfono API 28 y tableta API 36 | Pendiente de validación manual. En la rotación no hay lógica explícita de restauración del formulario o de la posición del catálogo. | Pendiente de crear |
-| Marcar favoritos en el detalle y reflejarlos en el catálogo. | Aplicación | Funcionalidad no implementada todavía. | Pendiente de crear |
-| Ejecutar la suite automatizada de Flutter. | Entorno de desarrollo | `test/widget_test.dart` contiene una prueba del catálogo inicial; queda ejecutar `flutter test` y corregir cualquier fallo que aparezca. | Pendiente de verificar |
-
-La navegación al detalle, la confirmación y eliminación de productos, el alta, el ordenamiento y «Acerca de» ya están conectados en el código; no son incidencias pendientes de integración.
+| Qué pasa | Dispositivo | Solución o estado | Issue |
+|----------|-------------|-------------------|-------|
+| El test inicial `widget_test.dart` presenta referencias que pueden no coincidir con la aplicación modificada. | Entorno de desarrollo | Pendiente de revisar y corregir. | Pendiente de crear |
+| Falta ejecutar y registrar las pruebas manuales en los emuladores Android. | Teléfono API 28 y tableta API 36 | Pendiente de realizar. | Pendiente de crear |
+| Falta comprobar el comportamiento de textos largos, el teclado abierto y la rotación de pantalla. | Teléfono API 28 y tableta API 36 | Pendiente de validar manualmente. | Pendiente de crear |
+| La funcionalidad de favoritos todavía no está implementada en el proyecto. | Aplicación | Pendiente de implementar y comprobar. | Pendiente de crear |
 
 ## Declaración del uso de IA
 
-Se ha utilizado ChatGPT como herramienta de apoyo para preparar y explicar parte del código del catálogo, organizar los archivos y redactar documentación. También se ha utilizado Claude (Anthropic) como apoyo para la parte de detalle (Salva).
+Se ha utilizado ChatGPT como herramienta de apoyo para preparar y explicar parte del código del catálogo, organizar los archivos y redactar documentación.
+También se ha utilizado Claude (Anthropic) como apoyo para la parte de detalle (Salva)
