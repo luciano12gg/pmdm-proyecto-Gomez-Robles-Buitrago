@@ -12,8 +12,8 @@ class ComercioApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Mi comercio',
-      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.brown)),
+      title: 'Tienda de Informática',
+      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue)),
       home: const CatalogoScreen(),
     );
   }
