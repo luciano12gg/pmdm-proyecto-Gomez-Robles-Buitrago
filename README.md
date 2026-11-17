@@ -73,15 +73,6 @@ El catálogo se incorporó a `main` mediante el pull request **#2**. Salva ha de
 | 14 | «Acerca de» muestra la información de la tienda | Realizado | Realizado |
 | 15 | La alerta permite cancelar el borrado o confirmarlo | Realizado | Realizado |
 
-## Incidencias
-
-| Qué pasa | Dispositivo | Solución o estado | Issue |
-|----------|-------------|-------------------|-------|
-| El test inicial `widget_test.dart` presenta referencias que pueden no coincidir con la aplicación modificada. | Entorno de desarrollo | Pendiente de revisar y corregir. | Pendiente de crear |
-| Falta ejecutar y registrar las pruebas manuales en los emuladores Android. | Teléfono API 28 y tableta API 36 | Pendiente de realizar. | Pendiente de crear |
-| Falta comprobar el comportamiento de textos largos, el teclado abierto y la rotación de pantalla. | Teléfono API 28 y tableta API 36 | Pendiente de validar manualmente. | Pendiente de crear |
-| La funcionalidad de favoritos todavía no está implementada en el proyecto. | Aplicación | Pendiente de implementar y comprobar. | Pendiente de crear |
-
 ## Declaración del uso de IA
 
 Se ha utilizado ChatGPT como herramienta de apoyo para preparar y explicar parte del código del catálogo, organizar los archivos y redactar documentación.
