@@ -5,8 +5,13 @@ import '../models/producto.dart';
 /// Pantalla de detalle de un producto.
 class DetalleScreen extends StatelessWidget {
   final Producto producto;
+  final VoidCallback onBorrar;
 
-  const DetalleScreen({super.key, required this.producto});
+  const DetalleScreen({
+    super.key,
+    required this.producto,
+    required this.onBorrar,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +31,15 @@ class DetalleScreen extends StatelessWidget {
             Text(producto.descripcion, style: textos.bodyLarge),
             const SizedBox(height: 24),
             Text(producto.precioTexto, style: textos.titleLarge),
+            const Spacer(),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.icon(
+                onPressed: onBorrar,
+                icon: const Icon(Icons.delete),
+                label: const Text('Borrar producto'),
+              ),
+            ),
           ],
         ),
       ),
