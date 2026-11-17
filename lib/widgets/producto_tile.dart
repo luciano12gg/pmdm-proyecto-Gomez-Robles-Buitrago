@@ -1,5 +1,4 @@
 import 'package:comercio_app/models/producto.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProductoTile extends StatelessWidget{

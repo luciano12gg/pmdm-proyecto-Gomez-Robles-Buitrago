@@ -35,6 +35,9 @@ flutter run
 | ProductoTile | `lib/widgets` | StatelessWidget | Muestra el nombre, la categoría y el precio de cada producto y recibe la acción al pulsarlo. | Luciano |
 | DetalleScreen | `lib/screens` | StatelessWidget | Recibe un `Producto` por el constructor y muestra su nombre, categoría, descripción y precio. La flecha de volver del `AppBar` aparece sola al llegar con `Navigator.push`. | Salva |
 | confirmarBorrado (función, no clase) | `lib/widgets` | — | Abre un `AlertDialog` con «Cancelar» y «Borrar» mediante `showDialog`. Devuelve `true` si se confirma y `false` si se cancela o se cierra el diálogo. | Salva |
+| NuevoProductoScreen | `lib/screens` | StatefulWidget | Muestra el formulario de alta y devuelve el producto creado al catálogo. | Carlos |
+| _NuevoProductoScreenState | `lib/screens` | 	State<NuevoProductoScreen> | Controla los campos, valida los datos y crea el producto al guardar. | Carlos
+| MenuCatalogo | `lib/widgets` | StatelessWidget | 	Muestra las opciones de ordenar por nombre, ordenar por precio y «Acerca de». | Carlos
 
 **Otros archivos:** `lib/data/productos_ejemplo.dart` contiene los ocho productos de la tienda; `lib/main.dart` inicia la aplicación. La pantalla de detalle y la alerta de borrado (`detalle_screen.dart` y `confirmar_borrado.dart`) están documentadas arriba; las clases de formulario y menú se documentarán cuando estén integradas.
 
@@ -44,7 +47,7 @@ flutter run
 |---------|---------------------|------|
 | Luciano | Datos de ocho productos, catálogo con lista y widget de producto. | `catalogo` |
 | Salva | Pantalla de detalle (`DetalleScreen`) y alerta de confirmación de borrado (`confirmarBorrado`). | `detalle` |
-| Carlos | Formulario y menú de navegación (desarrollados por Carlos; integración pendiente de comprobar). | `formulario-menu` |
+| Carlos | 	Formulario de alta con validación, devolución del producto al catálogo y menú para ordenar por nombre, por precio y mostrar «Acerca de». | `formulario-menu` |
 
 El catálogo se incorporó a `main` mediante el pull request **#2**. Salba ha desarrollado la parte de detalle en la rama `detalle`; Carlos la de formulario y menú. Queda por comprobar la integración de ambas en `main`.
 
@@ -64,6 +67,11 @@ El catálogo se incorporó a `main` mediante el pull request **#2**. Salba ha de
 | 8 | Tras pulsar Inicio y volver, la app está donde estaba | Pendiente | Pendiente |
 | 9 | En la tableta la interfaz aprovecha el ancho o al menos no queda rota | Pendiente | Pendiente |
 | 10 | No hay errores rojos en la consola de depuración | Pendiente | Pendiente |
+| 11 | Guardar un producto válido lo añade al catálogo una sola vez	Pendiente | Pendiente
+| 12 | Cancelar el formulario o volver atrás no añade productos	Pendiente | Pendiente
+| 13 | El menú ordena por nombre y por precio de menor a mayor	Pendiente | Pendiente
+| 14 | «Acerca de» muestra la información de la tienda	Pendiente | Pendiente
+| 15 | La alerta permite cancelar el borrado o confirmarlo	Pendiente | Pendiente
 
 ## Incidencias
 
